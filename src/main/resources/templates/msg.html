@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text>Carregando</title>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        /* Exibição da mensagem com base no parâmetro */
+        var msg = /*[[${msg}]]*/ "Algo inesperado aconteceu.";
+        var link = /*[[${link}]]*/ "/";
+        function showAlertAndRedirect() {
+                alert(msg);
+                window.location.href = link;
+        }
+        /*]]>*/
+    </script>
+</head>
+<body onload="showAlertAndRedirect()">
+</body>
+</html>

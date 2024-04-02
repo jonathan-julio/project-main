@@ -92,12 +92,12 @@
     </header>
     <div class="container">
         <h1>Login</h1>
-        <form>
+        <form th:action="@{/user/login/}" >
             <label for="username">Usuário</label>
-            <input type="text" id="username" name="username" required>
+            <input th:field="*{user.username}" type="text" id="username" name="username" required>
 
             <label for="password">Senha</label>
-            <input type="password" id="password" name="password" required>
+            <input th:field="*{user.password}" type="password" id="password" name="password" required>
 
             <button type="submit">Login</button>
         </form>
