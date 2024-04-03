@@ -1,5 +1,8 @@
 package com.jonathan.springmvcapp.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,16 +63,26 @@ public class UserController {
         try {
             boolean response = userService.login(user);
             if (response) {
-                msg = "Autenticação realizada com sucesso.";
-                link = "/";
+                List<Post> posts = new ArrayList<>();
+                model.addAttribute("user", user);
+                model.addAttribute("posts", posts);
+
+                return "home/home";
+            }else{
+                model.addAttribute("msg", msg);
+                model.addAttribute("link", link);
+                return "msg";
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            msg = "Algo inesperado aconteceu...";
+            link = "/login/";
+            model.addAttribute("msg", msg);
+            model.addAttribute("link", link);
+            return "msg";
         }
-        model.addAttribute("msg", msg);
-        model.addAttribute("link", link);
-        return "msg";
     }
+
+    
 
 }

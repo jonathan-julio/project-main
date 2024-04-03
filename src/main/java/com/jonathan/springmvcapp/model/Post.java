@@ -18,14 +18,15 @@ public class Post {
     private String img;
     private String descricao;
     private List<Integer> usuarios;
-
+    private String github;
     public Post() {
     }
-    public Post(Integer id, String img, String descricao, List<Integer> usuarios) {
+    public Post(Integer id, String img, String descricao, List<Integer> usuarios, String github) {
         this.id = id;
         this.img = img;
         this.descricao = descricao;
         this.usuarios = usuarios;
+        this.github = github;
     }
     public Integer getId() {
         return id;
@@ -51,9 +52,18 @@ public class Post {
     public void setUsuarios(List<Integer> usuarios) {
         this.usuarios = usuarios;
     }
+    public String getGithub() {
+        return github;
+    }
+    public void setGithub(String github) {
+        this.github = github;
+    }
     @Override
     public String toString() {
-        return "Post [id=" + id + ", img=" + img + ", descricao=" + descricao + ", usuarios=" + usuarios + "]";
+        return "Post [id=" + id + ", img=" + img + ", descricao=" + descricao + ", usuarios=" + usuarios + ", github="
+                + github + "]";
     }
+
+    
     
 }

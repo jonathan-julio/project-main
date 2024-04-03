@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #5555ffb2;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            text-align: center;
+            height: 100vh;
+            margin: 0;
+           
+        }
+
+        h1 {
+            font-size: 2.5em;
+        }
+
+        p {
+            font-size: 1.1em;
+        }
+        #Title-post{
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+        .grid-container {
+            display:  grid ;
+            background-color: #3333332a;
+            padding: 10px;
+            margin: 0;
+            grid-template-columns: repeat(6, 1fr); 
+            gap: 20px;
+            position: relative;
+            border-radius: 20px;
+            max-width: 700px;
+        }
+        .grid-container-empty {
+            display:  grid ;
+            background-color: #3333333d;
+            padding: 10px;
+            margin: 0;
+            grid-template-columns: repeat(1, 1fr); 
+            gap: 20px;
+            position: relative;
+            border-radius: 20px;
+            max-width: 700px;
+        }
+        .grid-item  {
+            position: relative;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+
+        .grid-item img {
+            position: relative;
+            height: 50px; 
+            width: 50px; 
+            object-fit: cover;
+            border-radius: 25px;
+            filter: grayscale(100%);
+        }
+        .grid-item:hover img {
+            transform: scale(1.1); 
+            filter: grayscale(0%);
+        }
+        img{
+            margin: 10px;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        #divisor{
+            padding: 0;
+            margin: 0;
+            display: flex;
+            height: 20px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+    </style>
+    <title>My Portfolio</title>
+</head>
+<body>
+    <div>
+        <h1>Area de trabalho</h1>
+            <div class="grid-container">
+                <a th:href="'/' + ${user.username}" ><div class="grid-item">
+                    <img src="/img/personalizar.png/" alt="Foto 1">
+                <div id="Title-post">Personaliza</div></div></a>
+                <a href="https://github.com/jonathan-julio/bafafa_bar" >
+                    <div  class="grid-item"><img src="/img/portfolio.png/" alt="Foto 2">
+                        <div id="Title-post" >Portfolio</div>
+                    </div>
+                </a>
+                <a href="https://github.com/jonathan-julio/logging-microservice" >
+                    <div class="grid-item"><img src="/img/post.png/" alt="Foto 3">
+                        <div id="Title-post" >Postar</div>
+                    </div>
+                </a>
+                <a href="https://github.com/jonathan-julio/mynetflix" >
+                    <div class="grid-item"><img src="/img/projetos.png/" alt="Foto 4">
+                        <div id="Title-post">Projetos</div>
+                    </div>
+                </a>
+                <a href="https://github.com/jonathan-julio/mynetflix" >
+                    <div class="grid-item"><img src="/img/perfil.png/" alt="Foto 4">
+                        <div id="Title-post">Perfil</div>
+                    </div>
+                </a>
+                <a href="/login/" >
+                    <div class="grid-item"><img src="/img/sair.png/" alt="Foto 4">
+                        <div id="Title-post">Sair</div>
+                    </div>
+                </a>
+            </div>
+            <div id="divisor"></div>
+            <div class="grid-container-empty">
+                <th:block th:if="${posts.empty}">
+                    <p>Nenhum projeto cadastrado.</p>
+                </th:block>
+                <th:block th:if="${not posts.empty}"></th:block>
+                <li th:each="post : ${posts}">
+                    <!-- <span
+                        th:text="${aluno.pessoa.primeiroNome} +' '+ ${aluno.pessoa.ultimoNome} + ' - Curso:  ' + ${aluno.curso.nome} "> -->
+                        ola
+                </li>
+                </th:block>
+            </div>
+    </div>
+</body>
+</html>

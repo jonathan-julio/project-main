@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <title>Jonathan Júlio</title>
+
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <img id="logo" src="/img/logo.jpg" alt="Logo">
+                
+            </div>
+            <div id="expanded-hearder"></div>
+            <div class="search-box">
+                <ul class="menu-items">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#endIntro">projetos</a></li>
+                    <li><a href="#endProjects">Carreira</a></li>
+                    <li><a href="#endTimeline">sobre</a></li>
+                </ul>
+            </div>
+        </header>
+        <section class="section-layout">
+            <div id="section-intro">
+                <div id="s1d" ><h1>Jonathan Júlio</h1></div>
+                <div id="s1d" style="margin-bottom: 20px;">A tecnologia não é apenas uma ferramenta,<br>
+                    é a expressão do potencial humano <br>transformando o mundo.<br></div>
+                <div id="s1d" style="font-size: 20px; margin-bottom: 50px;"><a href="#endIntro" >Saiba mais </a></div>
+            </div>
+            <div id="section-intro-icon">
+                <div id="s1e"><span class="green">List</span>&lt;<span class="green">skills</span>&gt;<span class="blue"> skills</span> = 
+                    <span class="purple">new</span> 
+                    <span class="yellow">ArrayList</span>&lt;&gt;<span class="purple">()</span>;</div>
+                <div id="s1e"><span class="blue">skills</span>.<span class="yellow">add</span><span class="purple">(</span><span class="blueli">aplicativosMobile</span><span class="purple">)</span>;
+                </div>
+                <div id="s1e">
+                    <span class="blue">skills</span>.<span class="yellow">add</span><span class="purple">(</span><span class="blueli">aplicativosWebFrontEnd</span><span class="purple">)</span>;
+                </div>
+                <div id="s1e">
+                    <span class="blue">skills</span>.<span class="yellow">add</span><span class="purple">(</span><span class="blueli">aplicativosWebBackEnd</span><span  class="purple">)</span>;
+                </div>
+            </div>
+        </section>
+        <div id="endIntro"></div>
+        <section class="section-projects">
+            <div><h2  >Meus projetos</h2></div>
+            <div class="grid-container">
+                <a href="https://github.com/jonathan-julio/bus-2.0" ><div class="grid-item"><img src="https://neilpatel.com/wp-content/uploads/2017/12/codigos-html-para-paginas-web.jpeg" alt="Foto 1">
+                <div id="Title-post">Projeto front-end</div></div></a>
+                <a href="https://github.com/jonathan-julio/bafafa_bar" >
+                    <div  class="grid-item"><img src="https://img.freepik.com/fotos-gratis/representacoes-da-experiencia-do-usuario-e-design-de-interface_23-2150038906.jpg" alt="Foto 2">
+                        <div id="Title-post" >Projeto mobile</div>
+                    </div>
+                </a>
+                <a href="https://github.com/jonathan-julio/logging-microservice" >
+                    <div class="grid-item"><img src="https://verpex.com/assets/uploads/images/blog/How-to-become-a-Backend-Developer.jpg?v=1665484477" alt="Foto 3">
+                        <div id="Title-post" >Projeto back-end</div>
+                    </div>
+                </a>
+                <a href="https://github.com/jonathan-julio/mynetflix" >
+                    <div class="grid-item"><img src="https://almablog-media.s3.ap-south-1.amazonaws.com/001_b1c25f0654.png" alt="Foto 4">
+                        <div id="Title-post">Projeto full stack</div>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="#endProjects" >
+                    <button   class="arrow-button"><span class="arrow-down"></span></button>
+                </a>
+            </div>
+        </section>
+        <div style="padding: 2%; display: block;" id="endProjects"></div>
+        <section id="timeline" class="section-timeline">
+            <div><h2>Time line</h2></div>
+            <ul class="timeline">
+                <li class="event">
+                    <div class="event-marker">--------------2019--------------------------------</div>
+                    <div class="event-content">
+                        <h3>Bolsa Ouvidoria</h3>
+                        <p>(2019-2020)<br><br>Desenvolvimento de uma automação em python para melhorar o tempo de resposta para os chamados abertos.</p>
+                    </div>
+                </li>
+                <li class="event">
+                    <div class="event-marker">--------------2022-----------------------------------</div>
+                    <div class="event-content">
+                        <h3>Bolsa Pesquisa MFC</h3>
+                        <p>(2022-2023)<br><br>Desenvolvimento do aplicativo "MFC BY SASCAR" para o grupo Michelin, utilizando a tecnologia Flutter e seguindo a metodologia ágil Scrum. </p>
+                    </div>
+                </li>
+                <li class="event">
+                    <div class="event-marker">--------------2023---------------------------------------</div>
+                    <div class="event-content">
+                        <h3>Belt Sistemas</h3>
+                        <p>(2023-Atualmente)<br><br>QA na Belt Sistemas: Responsável pela garantia da qualidade em sistemas web e Delphi, realizando testes e assegurando a excelência na entrega das funcionalidades.</p>
+                    </div>
+                </li>
+                <li class="event">
+                    <div class="event-marker">--------------2023--------------------</div>
+                    <div class="event-content">
+                        <h3>Bolsa Pesquisa MFC-Mine</h3>
+                        <p>(2023-Atualmente)<br><br>Desenvolvimento de app Flutter para monitoramento remoto de veículos de mineração via solução IoT MFC-Mine, integrado a plataformas cloud para processamento de dados em tempo real..</p>
+                    </div>
+                </li>
+            </ul>
+            <div>
+                <a href="#endTimeline">
+                    <button class="arrow-button"><span class="arrow-down"></span></button>
+                </a>
+            </div>
+            
+            
+        </section>
+        <div id="endTimeline"></div>
+        <section id="about" class="section-about">
+            <div><h2>Sobre</h2></div>
+            <div class="layout-about">
+                <div id="section-intro-icon">
+                    <img id="s1d"  style="height: 4%; max-width: 300px;" src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png"></img></div>
+                <div id="text-about">
+                    <div id="s1e-about">Jonathan Julio é um estudante dedicado de Bacharelado em Tecnologia da Informação, com um foco especializado no desenvolvimento móvel e back-end. Seu portfólio destaca-se com projetos impressionantes, como o desenvolvimento do aplicativo "MFC BY SASCAR" e sua participação como QA na Belt Sistemas. Um dos seus projetos mais notáveis inclui uma solução inovadora de IoT para o aplicativo MFC-Mine. Sua abordagem proativa e seu bom humor contagioso o tornam uma força dinâmica em qualquer equipe. Com uma mente ágil e uma atitude "eu vou resolver isso", Jonathan está preparado para enfrentar novos desafios enquanto continua a sua jornada acadêmica, e seu compromisso com a comunidade, evidenciado pelo trabalho voluntário como bolsista de monitoria de cálculo 1, demonstra sua dedicação além do ambiente acadêmico. Com um olhar para o futuro e um toque de humor, Jonathan está determinado a alcançar suas metas profissionais e até mesmo a realizar sonhos mais inusitados, como possuir uma geladeira com o freezer na parte de baixo.</div>
+                </div>
+            </div> 
+        </section>
+        <div class="footer">
+            <footer>
+                <p>&copy; 2024 Jonathan Julio - Todos os direitos reservados.</p>
+            </footer>
+        </div> 
+    </body>
+</html>
