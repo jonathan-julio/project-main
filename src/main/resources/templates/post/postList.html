@@ -124,20 +124,22 @@
                 </a>
             </div>
             <div id="divisor"></div>
-            <div class="grid-container">
-                <th:block th:if="${posts.empty}">
+            <th:block th:if="${posts.empty}">
+                <div class="grid-container-empty">
                     <p>Nenhum projeto cadastrado.</p>
-                </th:block>
-                <th:block th:if="${not posts.empty}"></th:block>
-                <div th:each="post : ${posts}">
-                    <div style="background-color: black;">
-                        <p th:text="${post.descricao}"></p>
-                        <p th:text="${post.id}"></p><br>
-                    </div>
-                    
                 </div>
-                </th:block>
-            </div>
+            </th:block>
+            <th:block th:if="${not posts.empty}">
+                <div class="grid-container">
+                    <div th:each="post : ${posts}">
+                        <div style="background-color: black;">
+                            <p th:text="${post.descricao}"></p>
+                            <p th:text="${post.id}"></p><br>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+            
     </div>
 </body>
 </html>
