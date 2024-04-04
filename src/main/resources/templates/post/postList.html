@@ -92,12 +92,12 @@
 </head>
 <body>
     <div>
-        <h1 th:text="'Seja bem vindo ' + ${user.username}">Area de trabalho</h1>
+        <h1 >Seus projetos</h1>
             <div class="grid-container">
                 <a th:href="'/user/login/' " ><div class="grid-item">
                     <img src="/img/personalizar.png/" alt="Foto 1">
                 <div id="Title-post">Personaliza</div></div></a>
-                <a th:href="'/' + ${user.username}" target="_blank" >
+                <a th:href="'/' + ${user.username}"  target="_blank">
                     <div  class="grid-item"><img src="/img/portfolio.png/" alt="Foto 2">
                         <div id="Title-post" >Portfolio</div>
                     </div>
@@ -124,8 +124,19 @@
                 </a>
             </div>
             <div id="divisor"></div>
-            <div class="grid-container-empty">
-                    <p th:text="'Seja bem vindo ' + ${user.username}">Nenhum projeto cadastrado.</p>
+            <div class="grid-container">
+                <th:block th:if="${posts.empty}">
+                    <p>Nenhum projeto cadastrado.</p>
+                </th:block>
+                <th:block th:if="${not posts.empty}"></th:block>
+                <div th:each="post : ${posts}">
+                    <div style="background-color: black;">
+                        <p th:text="${post.descricao}"></p>
+                        <p th:text="${post.id}"></p><br>
+                    </div>
+                    
+                </div>
+                </th:block>
             </div>
     </div>
 </body>

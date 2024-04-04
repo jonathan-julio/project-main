@@ -11,7 +11,7 @@ import com.jonathan.springmvcapp.model.*;
 
 @Controller
 @RequestMapping("/")
-public class homeController {
+public class HomeController {
 
 	@GetMapping
 	public String showMenu(Model model) {

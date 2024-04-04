@@ -92,7 +92,7 @@
     </header>
     <div class="container">
         <h1>Login</h1>
-        <form th:action="@{/user/login/}" >
+        <form th:action="@{/user/login/}" method="post">
             <label for="username">Usuário</label>
             <input th:field="*{user.username}" type="text" id="username" name="username" required>
 

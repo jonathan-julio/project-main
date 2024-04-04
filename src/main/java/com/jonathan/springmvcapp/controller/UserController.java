@@ -15,6 +15,8 @@ import com.jonathan.springmvcapp.service.Person.PersonService;
 import com.jonathan.springmvcapp.service.Profile.ProfileService;
 import com.jonathan.springmvcapp.service.User.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/user/")
 public class UserController {
@@ -55,18 +57,30 @@ public class UserController {
     }
 
     @RequestMapping("login/")
-    public String getLogin(@ModelAttribute("user") User user, Model model) {
+    public String getLogin(@ModelAttribute("user") User user, Model model, HttpSession session) {
 
         String msg = "Login ou senha invalido.";
         String link = "/login/";
+        User user2 = (User) session.getAttribute("user");
+        User userSession = new User();
 
+        if (user != null) {
+            userSession = user;
+        }
+
+        if (user2 != null) {
+            userSession = user2;
+        }
+        
         try {
-            boolean response = userService.login(user);
-            if (response) {
-                List<Post> posts = new ArrayList<>();
-                model.addAttribute("user", user);
-                model.addAttribute("posts", posts);
+            User response = userService.login(userSession);
 
+            if (response != null ) {
+                List<Post> posts = new ArrayList<>();
+                System.out.println(response.toString());
+                session.setAttribute("user", response);
+                model.addAttribute("posts", posts);
+                model.addAttribute("user", response);
                 return "home/home";
             }else{
                 model.addAttribute("msg", msg);
@@ -82,6 +96,21 @@ public class UserController {
             return "msg";
         }
     }
+
+
+    @RequestMapping("logout/")
+    public String logout( Model model, HttpSession session) {
+
+        String msg = "Logout realizado com sucesso..";
+        String link = "/login/";
+
+        session.setAttribute("user", null);
+        model.addAttribute("msg", msg);
+        model.addAttribute("link", link);
+        return "msg";
+    }
+
+   
 
     
 

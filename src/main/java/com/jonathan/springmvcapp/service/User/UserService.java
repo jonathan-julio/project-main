@@ -1,11 +1,14 @@
 package com.jonathan.springmvcapp.service.User;
 
 import com.jonathan.springmvcapp.model.User;
+import java.util.List;
 
 public interface UserService {
 
    public User createrUser(User person);
 
-   public boolean login(User user);
+   public User login(User user);
+
+   public List<User> findAll();
 
 }

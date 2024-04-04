@@ -2,6 +2,8 @@ package com.jonathan.springmvcapp.service.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import java.util.List;
+import java.util.ArrayList;
 
 import com.jonathan.springmvcapp.model.User;
 
@@ -24,21 +26,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean login(User user) {
-        try {
-            System.out.println("getUsername " + user.getUsername());
-            System.out.println("getPassword " + user.getPassword());
-            User user2 = userRepository.login(user.getUsername(), user.getPassword());
-            if (user2 != null) {
-                return true;
+    public User login(User user) {
 
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-            return false;
+            User user2 = userRepository.login(user.getUsername(), user.getPassword());
+            return user2;
+    }
+
+    public List<User> findAll(){
+        List<User> users =  userRepository.findAll();
+        List<User> usersOut = new ArrayList<>();
+
+        for (User user : users) {
+            User userAux = new User();
+            userAux.setId(user.getId());
+            userAux.setUsername(user.getUsername());
+            usersOut.add(userAux);
         }
+
+        return usersOut;
+
     }
 
     /*

@@ -38,8 +38,9 @@
             position: relative;
             border-radius: 20px;
             max-width: 700px;
+            text-align: start ;
         }
-        .grid-container-empty {
+        .grid-container-post {
             display:  grid ;
             background-color: #3333333d;
             padding: 10px;
@@ -92,7 +93,7 @@
 </head>
 <body>
     <div>
-        <h1 th:text="'Seja bem vindo ' + ${user.username}">Area de trabalho</h1>
+        <h1>Post seu projeto</h1>
             <div class="grid-container">
                 <a th:href="'/user/login/' " ><div class="grid-item">
                     <img src="/img/personalizar.png/" alt="Foto 1">
@@ -124,8 +125,35 @@
                 </a>
             </div>
             <div id="divisor"></div>
-            <div class="grid-container-empty">
-                    <p th:text="'Seja bem vindo ' + ${user.username}">Nenhum projeto cadastrado.</p>
+            <div class="grid-container-post">
+                <form action="#" th:action="@{/post/setPost/}" method="post">
+                    <label for="texto">Imagem:</label><br>
+                    <input th:field="*{post.img}" type="text" id="texto" name="texto" required><br>
+                
+                    <label for="textoSecundario">Descrição:</label><br>
+                    <input th:field="*{post.descricao}" type="text" id="textoSecundario" name="textoSecundario" required><br>
+                
+                    <label for="about">Link do github:</label><br>
+                    <textarea th:field="*{post.github}" id="about" name="github"  required></textarea><br>
+                    
+                    <label for="usuarios">Usuarios:</label><br>
+                    <th:block th:if="${usuarios.empty}">
+                        <p>Nenhum usuario cadastrado.</p>
+                    </th:block>
+                    <th:block th:if="${not usuarios.empty}"></th:block>
+                    <p>
+                        <div th:each="usuario : ${usuarios}">
+                            <input  th:field="*{post.usuarios}" 
+                                    type="checkbox" 
+                                    th:value="${usuario.id}" 
+                                    th:text="${usuario.username}" 
+                                    th:disabled="${usuario.id == user.id}" />
+                        </div>
+                    </p>
+                    </th:block>
+                
+                    <button type="submit">Cadastrar</button>
+                </form>
             </div>
     </div>
 </body>
