@@ -43,25 +43,27 @@
             </div>
             <div id="divisor"></div>
             <div class="container-form">
-                <div class="post">
                     <form  th:action="@{/personalizar/setProfile/}" method="post">
-                        <label for="texto">Texto:</label>
-                        <input th:field="*{profile.texto}" th:value="${profile.texto}" type="text" id="texto" name="texto" placeholder="Esse texto ficará no lado esquerdo do topo da pagina."><br>
-                
-                        <label for="textoSecundario">Texto Secundario:</label>
-                        <textarea th:field="*{profile.textoSecundario}" th:value="${profile.textoSecundario}" type="text" id="textoSecundario" name="textoSecundario" placeholder="Esse texto ficará no lado direito do topo da pagina."></textarea><br>
-                
-                        <label for="about">About:</label>
-                        <textarea th:field="*{profile.about}" th:value="${profile.about}" id="about" name="about" rows="4" cols="50" placeholder="Esse texto no About. limite de 4000 caracteres."></textarea><br>
-                
-                        <label for="color">Color:</label><br>
-                        <input th:field="*{profile.color}" th:value="${profile.color}" type="color" id="color" name="color" ><br>
-                        <span style="font-size: 12px; color: rgb(40, 40, 40);"> (Essa será a cor principal das letras do seu portfolio) </span><br><br>
-                
-                        <label for="background">Background:</label><br>
-                        <input  th:field="*{profile.background}" th:value="${profile.background}" type="color" id="color" name="background"><br>
-                        <span style="font-size: 12px; color: rgb(40, 40, 40);"> (Essa será a cor do background do seu portfolio) </span><br><br><br>
-                        
+                        <div class="post">
+                            <label for="texto">Texto:</label>
+                            <input style="width: 100%;" th:field="*{profile.texto}" th:value="${profile.texto}" type="text" id="texto" name="texto" placeholder="Esse texto ficará no lado esquerdo do topo da pagina."><br>
+                            
+                            <label for="textoSecundario">Texto Secundario:</label>
+                            <textarea th:field="*{profile.textoSecundario}" th:value="${profile.textoSecundario}" type="text" id="textoSecundario" name="textoSecundario" placeholder="Esse texto ficará no lado direito do topo da pagina."></textarea><br>
+                    
+                            <label for="about">About:</label>
+                            <textarea th:field="*{profile.about}" th:value="${profile.about}" id="about" name="about" rows="4" cols="50" placeholder="Esse texto no About. limite de 4000 caracteres."></textarea><br>
+                    
+                            <label for="color">Color:</label><br>
+                            <input th:field="*{profile.color}" th:value="${profile.color}" type="color" id="color" name="color" ><br>
+                            <span style="font-size: 12px; color: rgb(40, 40, 40);"> (Essa será a cor principal das letras do seu portfolio) </span><br><br>
+                    
+                            <label for="background">Background:</label><br>
+                            <input  th:field="*{profile.background}" th:value="${profile.background}" type="color" id="color" name="background"><br>
+                            <span style="font-size: 12px; color: rgb(40, 40, 40);"> (Essa será a cor do background do seu portfolio) </span><br><br><br>
+                            
+                            
+                        </div>
                         <button type="submit">Alterar</button>
                     </form>
                 </div>
