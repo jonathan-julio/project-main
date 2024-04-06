@@ -30,6 +30,7 @@ public class UserController {
     @Autowired
     ProfileService profileService;
 
+
     @RequestMapping("creater-user/")
     public String getSignup(@ModelAttribute("user") User user, @ModelAttribute("profile") Profile profile,
             @ModelAttribute("person") Person person, Model model) {
@@ -56,46 +57,68 @@ public class UserController {
         return "msg";
     }
 
-    @RequestMapping("login/")
+    @RequestMapping("personalizar/")
     public String getLogin(@ModelAttribute("user") User user, Model model, HttpSession session) {
-
-        String msg = "Login ou senha invalido.";
-        String link = "/login/";
-        User user2 = (User) session.getAttribute("user");
-        User userSession = new User();
-
-        if (user != null) {
-            userSession = user;
-        }
-
-        if (user2 != null) {
-            userSession = user2;
-        }
         
+        
+        Utils utils = new Utils(userService);
+        User userSession = utils.getUser(user, session);
+        System.out.println(userSession);
+    
+        String msg = "Algo inesperado aconteceu...";
+        String link = "/login/";
+    
         try {
-            User response = userService.login(userSession);
-
-            if (response != null ) {
-                List<Post> posts = new ArrayList<>();
-                System.out.println(response.toString());
-                session.setAttribute("user", response);
-                model.addAttribute("posts", posts);
-                model.addAttribute("user", response);
+            Profile profile = profileService.getProfile(userSession.getId());
+    
+            if (utils.isAuthenticated(userSession)) {
+                session.setAttribute("user", userSession);
+                model.addAttribute("user", userSession);
+                model.addAttribute("profile", profile);
                 return "home/home";
             }else{
-                model.addAttribute("msg", msg);
-                model.addAttribute("link", link);
-                return "msg";
+                 msg = "Usuario não autenticado.";
             }
-
+    
         } catch (Exception e) {
-            msg = "Algo inesperado aconteceu...";
-            link = "/login/";
-            model.addAttribute("msg", msg);
-            model.addAttribute("link", link);
-            return "msg";
+            System.err.println(e);
         }
+    
+        model.addAttribute("msg", msg);
+        model.addAttribute("link", link);
+        return "msg";
     }
+
+    @RequestMapping("login/")
+    public String getPerfil(@ModelAttribute("user") User user, Model model, HttpSession session) {
+        
+        Utils utils = new Utils(userService);
+        User userSession = utils.getUser(user, session);
+    
+        String msg = "Algo inesperado aconteceu...";
+        String link = "/login/";
+    
+        try {
+            Person person = personService.getPerson(userSession.getId());
+    
+            if (utils.isAuthenticated(userSession)) {
+                session.setAttribute("user", userSession);
+                model.addAttribute("user", userSession);
+                model.addAttribute("person", person);
+                return "home/perfil";
+            }else{
+                 msg = "Usuario não autenticado.";
+            }
+    
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    
+        model.addAttribute("msg", msg);
+        model.addAttribute("link", link);
+        return "msg";
+    }
+    
 
 
     @RequestMapping("logout/")

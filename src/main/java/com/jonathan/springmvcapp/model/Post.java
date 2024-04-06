@@ -1,7 +1,6 @@
 package com.jonathan.springmvcapp.model;
 
 import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,14 +15,16 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private Integer id;
     private String img;
+    private String titulo;
     private String descricao;
     private List<Integer> usuarios;
     private String github;
     public Post() {
     }
-    public Post(Integer id, String img, String descricao, List<Integer> usuarios, String github) {
+    public Post(Integer id, String img, String titulo, String descricao, List<Integer> usuarios, String github) {
         this.id = id;
         this.img = img;
+        this.titulo = titulo;
         this.descricao = descricao;
         this.usuarios = usuarios;
         this.github = github;
@@ -39,6 +40,12 @@ public class Post {
     }
     public void setImg(String img) {
         this.img = img;
+    }
+    public String getTitulo() {
+        return titulo;
+    }
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
     public String getDescricao() {
         return descricao;
@@ -60,9 +67,10 @@ public class Post {
     }
     @Override
     public String toString() {
-        return "Post [id=" + id + ", img=" + img + ", descricao=" + descricao + ", usuarios=" + usuarios + ", github="
-                + github + "]";
+        return "Post [id=" + id + ", img=" + img + ", titulo=" + titulo + ", descricao=" + descricao + ", usuarios="
+                + usuarios + ", github=" + github + "]";
     }
+    
 
     
     

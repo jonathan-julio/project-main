@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/stylesPortfolio.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <title>Jonathan Júlio</title>
+
+    </head>
+    <body th:style="'color: ' + ${profile.color} + '; background-color: ' + ${profile.background} + ';'">
+        <header>
+            <div class="logo">
+                <img id="logo" src="/img/logo.jpg" alt="Logo">
+                
+            </div>
+            <div id="expanded-hearder"></div>
+            <div class="search-box">
+                <ul class="menu-items">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#endIntro">projetos</a></li>
+                    <li><a href="#endTimeline">sobre</a></li>
+                </ul>
+            </div>
+        </header>
+        <section class="section-layout">
+            <div id="section-intro">
+                <div id="s1d" ><h1  th:text="${person.nome}">Jonathan Júlio</h1></div>
+                <div  th:text="${profile.texto}" id="s1d" style="margin-bottom: 20px; width: 60%; display: flex;">
+                    </div>
+                <div id="s1d" style="font-size: 20px; margin-bottom: 50px;"><a href="#endIntro" >Saiba mais </a></div>
+            </div>
+            <div id="section-intro-icon">
+                <div  th:text="${profile.textoSecundario}" id="s1e"></div>
+                
+            </div>
+        </section>
+        <div id="endIntro"></div>
+        <section class="section-projects">
+            <div><h2  >Meus projetos</h2></div>
+                <div class="grid-container">
+                    <th:block th:if="${posts.empty}">
+                    <div class="grid-container-empty">
+                        <p>Nenhum projeto cadastrado.</p>
+                    </div>
+                </th:block>
+                <th:block th:if="${not posts.empty}">
+                    <div th:each="post, index  : ${posts}">
+                        <a th:href="${post.github}"  target="_blank">
+                            <div class="grid-item">
+                                <img th:src="*{'/postagens/'+{post.id} +'/'+{post.img}}"  th:alt="*{'Foto '+{index.index}}">
+                                <div th:text="${post.titulo}" id="Title-post">Projeto front-end</div>
+                            </div>
+                        </a>
+                    </div>
+                </th:block>
+            </div>
+            <div>
+                <a href="#endTimeline" >
+                    <button   class="arrow-button"><span class="arrow-down"></span></button>
+                </a>
+            </div>
+        </section>
+        </section>
+        <div id="endTimeline"></div>
+        <section id="about" class="section-about">
+            <div><h2>Sobre</h2></div>
+            <div class="layout-about">
+                <div id="section-intro-icon">
+                    <img id="s1d"  style="height: 4%; max-width: 300px;" src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png"></img></div>
+                <div id="text-about">
+                    <div th:text="${profile.about}" id="s1e-about">Descrição</div>
+                </div>
+            </div> 
+        </section>
+        <div class="footer">
+            <footer>
+                <p>&copy; 2024 Jonathan Julio - Todos os direitos reservados.</p>
+            </footer>
+        </div> 
+    </body>
+</html>

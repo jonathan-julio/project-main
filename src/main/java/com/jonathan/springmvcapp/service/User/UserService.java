@@ -9,6 +9,8 @@ public interface UserService {
 
    public User login(User user);
 
+   public User getUserByName(String name);
+
    public List<User> findAll();
 
 }

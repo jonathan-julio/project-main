@@ -1,5 +1,7 @@
 package com.jonathan.springmvcapp.service.Profile;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,27 +25,32 @@ public class ProfileServiceImpl implements ProfileService {
         }
     }
 
-    /*
-     * public boolean init = false;
-     * 
-     * @Autowired
-     * public void initCurso() {
-     * Pessoa p1 = new Pessoa("João", "Silva","joao@email.com");
-     * Pessoa p2 = new Pessoa("Maria", "Santos","maria@email.com");
-     * Pessoa p3 = new Pessoa("pedro", "Oliveira","pedro@email.com");
-     * 
-     * if (init == false) {
-     * pessoaRepository.save(p1);
-     * pessoaRepository.save(p2);
-     * pessoaRepository.save(p3);
-     * init = true;
-     * }
-     * }
-     * 
-     * @Override
-     * public List<Pessoa> getPessoas(){
-     * return pessoaRepository.findAll();
-     * }
-     */
+    @Override
+    public Profile getProfile(Integer id) {
+        List<Profile> profiles =  profileRepository.findAll();
+        Profile profile = new Profile();
+        for (Profile _profile : profiles) {
+            if (_profile.getId().equals(id)) {
+                profile = _profile;
+            }
+        }
+        return profile;
+    }
+
+    @Override
+    public boolean setProfile(Profile profile,Integer id) {
+
+       
+        try {
+            profileRepository.updateProfile(id,profile.getTexto(), profile.getTextoSecundario(), profile.getAbout(), profile.getColor(), profile.getBackground());
+            return true;
+        } catch (Exception e) {
+            
+            System.out.println("AQUI e : " + e);
+            return false;
+        } 
+         
+    }
+
 
 }

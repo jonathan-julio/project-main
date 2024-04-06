@@ -1,5 +1,6 @@
 package com.jonathan.springmvcapp.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Profile {
     private Integer id;
     private String texto;
     private String textoSecundario;
+    @Column(length = 4000)
     private String about;
     private String color;
     private String background;

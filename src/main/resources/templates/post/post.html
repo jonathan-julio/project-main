@@ -3,158 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            background-color: #5555ffb2;
-            color: white;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: start;
-            text-align: center;
-            height: 100vh;
-            margin: 0;
-           
-        }
-
-        h1 {
-            font-size: 2.5em;
-        }
-
-        p {
-            font-size: 1.1em;
-        }
-        #Title-post{
-            padding-top: 10px;
-            padding-bottom: 20px;
-        }
-        .grid-container {
-            display:  grid ;
-            background-color: #3333332a;
-            padding: 10px;
-            margin: 0;
-            grid-template-columns: repeat(6, 1fr); 
-            gap: 20px;
-            position: relative;
-            border-radius: 20px;
-            max-width: 700px;
-            text-align: start ;
-        }
-        .grid-container-post {
-            display:  grid ;
-            background-color: #3333333d;
-            padding: 10px;
-            margin: 0;
-            grid-template-columns: repeat(1, 1fr); 
-            gap: 20px;
-            position: relative;
-            border-radius: 20px;
-            max-width: 700px;
-        }
-        .grid-item  {
-            position: relative;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-        }
-
-
-        .grid-item img {
-            position: relative;
-            height: 50px; 
-            width: 50px; 
-            object-fit: cover;
-            border-radius: 25px;
-            filter: grayscale(100%);
-        }
-        .grid-item:hover img {
-            transform: scale(1.1); 
-            filter: grayscale(0%);
-        }
-        img{
-            margin: 10px;
-        }
-        a {
-            color: white;
-            text-decoration: none;
-        }
-        #divisor{
-            padding: 0;
-            margin: 0;
-            display: flex;
-            height: 20px;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-    </style>
+    <link rel="stylesheet" href="/css/styles.css">
     <title>My Portfolio</title>
 </head>
 <body>
-    <div>
-        <h1>Post seu projeto</h1>
-            <div class="grid-container">
-                <a th:href="'/user/login/' " ><div class="grid-item">
-                    <img src="/img/personalizar.png/" alt="Foto 1">
-                <div id="Title-post">Personaliza</div></div></a>
-                <a th:href="'/' + ${user.username}" target="_blank" >
-                    <div  class="grid-item"><img src="/img/portfolio.png/" alt="Foto 2">
-                        <div id="Title-post" >Portfolio</div>
+    <div class="content"> 
+        <h1>Poste seu projeto</h1>
+        <div class="grid-container">
+            <a th:href="'/user/login/'" >
+                <div class="grid-item"><img src="/img/perfil.png/" alt="Foto 4">
+                    <div id="Title-post">Perfil</div>
+                </div>
+            </a>
+            <a th:href="'/user/personalizar/' " ><div class="grid-item">
+                <img src="/img/personalizar.png/" alt="Foto 1">
+            <div id="Title-post">Personaliza</div></div></a>
+            <a th:href="'/' + ${user.username}" target="_blank" method="post" >
+                <div  class="grid-item"><img src="/img/portfolio.png/" alt="Foto 2">
+                    <div id="Title-post" >Portfolio</div>
+                </div>
+            </a>
+            <a th:href="'/post/creater/'" method="post">
+                <div class="grid-item">
+                    <img style="filter: invert();" src="/img/post.png/" alt="Foto 3">
+                    <div id="Title-post" >Postar</div>
+                </div>
+            </a>
+            <a th:href="'/post/getPost/'" method="post">
+                <div class="grid-item"><img src="/img/projetos.png/" alt="Foto 4">
+                    <div id="Title-post">Projetos</div>
+                </div>
+            </a>
+            
+            <a href="/user/logout/" >
+                <div class="grid-item"><img src="/img/sair.png/" alt="Foto 4">
+                    <div id="Title-post">Sair</div>
+                </div>
+            </a>
+        </div>
+        <div id="divisor"></div>
+        <div class="container-form">
+            <form action="#" th:action="@{/post/setPost/}" method="post" enctype="multipart/form-data">
+                <div class="post">
+                    <div style="flex: 1;">
+                        <label for="titulo">Titulo:</label>
+                        <input style="width: 100%;" th:field="*{post.titulo}" type="text" id="titulo" name="titulo" required placeholder="Ficara abaixo da foto do seu projeto."><br>
                     </div>
-                </a>
-                <a th:href="'/post/creater/'" method="post">
-                    <div class="grid-item"><img src="/img/post.png/" alt="Foto 3">
-                        <div id="Title-post" >Postar</div>
-                    </div>
-                </a>
-                <a th:href="'/post/getPost/'" method="post">
-                    <div class="grid-item"><img src="/img/projetos.png/" alt="Foto 4">
-                        <div id="Title-post">Projetos</div>
-                    </div>
-                </a>
-                <a href="https://github.com/jonathan-julio/mynetflix" >
-                    <div class="grid-item"><img src="/img/perfil.png/" alt="Foto 4">
-                        <div id="Title-post">Perfil</div>
-                    </div>
-                </a>
-                <a href="/user/logout/" >
-                    <div class="grid-item"><img src="/img/sair.png/" alt="Foto 4">
-                        <div id="Title-post">Sair</div>
-                    </div>
-                </a>
-            </div>
-            <div id="divisor"></div>
-            <div class="grid-container-post">
-                <form action="#" th:action="@{/post/setPost/}" method="post">
-                    <label for="texto">Imagem:</label><br>
-                    <input th:field="*{post.img}" type="text" id="texto" name="texto" required><br>
                 
-                    <label for="textoSecundario">Descrição:</label><br>
-                    <input th:field="*{post.descricao}" type="text" id="textoSecundario" name="textoSecundario" required><br>
+                    <div style="flex: 1; ">
+                        <label for="textoSecundario">Descrição:</label>
+                        <textarea  style="width: 100%; height: 50px;" th:field="*{post.descricao}" type="text" id="textoSecundario" name="textoSecundario" required placeholder="Futuramente sera usado na pagina do projeto. Atualmente apenas abre o link do github."></textarea><br>
+                    </div>
                 
-                    <label for="about">Link do github:</label><br>
-                    <textarea th:field="*{post.github}" id="about" name="github"  required></textarea><br>
+                    <div style="flex: 1;">
+                        <label for="about">Link do github:</label>
+                        <input  style="width: 100%;" th:field="*{post.github}" id="about" name="github" required placeholder="Ex: https://github.com/jonathan-julio/"><br>
+                    </div><br>
+                    <label for="usuarios">Usuarios:</label>
                     
-                    <label for="usuarios">Usuarios:</label><br>
-                    <th:block th:if="${usuarios.empty}">
-                        <p>Nenhum usuario cadastrado.</p>
-                    </th:block>
-                    <th:block th:if="${not usuarios.empty}"></th:block>
-                    <p>
-                        <div th:each="usuario : ${usuarios}">
-                            <input  th:field="*{post.usuarios}" 
-                                    type="checkbox" 
-                                    th:value="${usuario.id}" 
-                                    th:text="${usuario.username}" 
-                                    th:disabled="${usuario.id == user.id}" />
+                    <div style="max-width: 100%;">
+                        <div th:each="usuario : ${usuarios}" style="display: inline-block; max-width: 200px; margin-right: 10px;">
+                            <input th:field="*{post.usuarios}" 
+                                type="checkbox" 
+                                th:value="${usuario.id}" 
+                                th:text="${usuario.username}" 
+                                th:disabled="${usuario.id == user.id}" />
                         </div>
-                    </p>
-                    </th:block>
+                    </div><br><br>
+                    <label for="image">Imagem:</label>
+                </div>
                 
-                    <button type="submit">Cadastrar</button>
-                </form>
-            </div>
-    </div>
+                <div style="flex: 1; margin-right: 100%;">
+                    
+                    <input type="file" id="image" name="file" accept="image/jpeg" required><br>
+                </div><br><br>
+            
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+        <div class="footer">
+            <footer>
+                <p style="margin: 0;">&copy; 2024 Jonathan Julio - Todos os direitos reservados.</p>
+            </footer>
+        </div>
+    </div>  
 </body>
 </html>
+<!-- 
+ustify-content: center;
+            align-items: start;
+            text-align: center; -->

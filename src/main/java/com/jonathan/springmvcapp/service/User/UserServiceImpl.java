@@ -47,27 +47,18 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    /*
-     * public boolean init = false;
-     * 
-     * @Autowired
-     * public void initCurso() {
-     * Pessoa p1 = new Pessoa("João", "Silva","joao@email.com");
-     * Pessoa p2 = new Pessoa("Maria", "Santos","maria@email.com");
-     * Pessoa p3 = new Pessoa("pedro", "Oliveira","pedro@email.com");
-     * 
-     * if (init == false) {
-     * pessoaRepository.save(p1);
-     * pessoaRepository.save(p2);
-     * pessoaRepository.save(p3);
-     * init = true;
-     * }
-     * }
-     * 
-     * @Override
-     * public List<Pessoa> getPessoas(){
-     * return pessoaRepository.findAll();
-     * }
-     */
+    @Override
+    public User getUserByName(String name) {
+    List<User> uses = userRepository.findAll();
+    User _user = new User();
+        for (User user : uses) {
+            if (user.getUsername().equals(name)) {
+                _user = user;
+            }
+        }
+        return _user;
+    }
+
+    
 
 }

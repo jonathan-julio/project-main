@@ -5,8 +5,10 @@ import java.util.List;
 
 public interface PostService {
 
-   public boolean createrPost(Post person);
+    public Post createrPost(Post person);
 
-    public List<Post> getPosts(); 
+    public List<Post> getPosts();
+
+    public List<Post> getMyPosts(Integer id); 
 
 }

@@ -7,6 +7,8 @@ public interface ProfileService {
 
    public Profile createrProfile(Profile person);
 
-   /* public List<Pessoa> getPessoas(); */
+   public Profile getProfile(Integer id); 
+
+   public boolean setProfile(Profile profile, Integer id); 
 
 }
