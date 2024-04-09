@@ -1,5 +1,6 @@
 package com.jonathan.springmvcapp.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jonathan.springmvcapp.model.Log;
 import com.jonathan.springmvcapp.model.Post;
 import com.jonathan.springmvcapp.model.Profile;
 import com.jonathan.springmvcapp.model.User;
+import com.jonathan.springmvcapp.service.Log.LogService;
 import com.jonathan.springmvcapp.service.Profile.ProfileService;
 import com.jonathan.springmvcapp.service.User.UserService;
 
@@ -25,14 +28,16 @@ public class ProfileController {
     ProfileService profileService;
     @Autowired
     UserService userService;
-    
+    @Autowired
+    LogService logService;
 
     @RequestMapping("setProfile/")
-    public String setProfile(@ModelAttribute("profile") Profile profile, @ModelAttribute("user") User user, Model model, HttpSession session) {
+    public String setProfile(@ModelAttribute("profile") Profile profile, @ModelAttribute("user") User user, Model model,
+            HttpSession session) {
 
         String msg = "Login ou senha invalido.";
         String link = "/login/";
-        
+
         Utils utils = new Utils(userService);
         User userSession = utils.getUser(user, session);
 
@@ -41,12 +46,15 @@ public class ProfileController {
             model.addAttribute("user", userSession);
             model.addAttribute("profile", profile);
             try {
-                profileService.setProfile(profile , userSession.getProfile());
+                profileService.setProfile(profile, userSession.getProfile());
+                Log log = new Log(userSession.getId(), "setProfile", "Alteração realizada de: " + profile.toString(),
+                        LocalDate.now().toString());
+                logService.newLog(log);
                 return "home/home";
             } catch (Exception e) {
                 return "home/home";
             }
-        }else{
+        } else {
             msg = "Algo inesperado aconteceu...";
             link = "/login/";
             model.addAttribute("msg", msg);
@@ -55,5 +63,5 @@ public class ProfileController {
         }
 
     }
-    
+
 }

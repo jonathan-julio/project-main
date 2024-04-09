@@ -9,18 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jonathan.springmvcapp.model.*;
+import com.jonathan.springmvcapp.service.Log.LogService;
 import com.jonathan.springmvcapp.service.Post.PostService;
 import com.jonathan.springmvcapp.service.User.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
-
-
-
 
 @Controller
 @RequestMapping("/post/")
@@ -32,24 +31,27 @@ public class PostController {
     @Autowired
     PostService postService;
 
+    @Autowired
+    LogService logService;
 
     @RequestMapping("creater/")
     public String creater(@ModelAttribute("post") Post post, HttpSession session, Model model) {
         List<User> usuarios = userService.findAll();
         User user = (User) session.getAttribute("user");
         System.out.println(user.toString());
-        
+
         model.addAttribute("post", new Post());
-        model.addAttribute("usuarios",  usuarios);
-        model.addAttribute("user",  user);
-        /* model.addAttribute("file",  file); */
+        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("user", user);
+        /* model.addAttribute("file", file); */
         session.setAttribute("user", user);
 
         return "post/post";
     }
 
     @RequestMapping("setPost/")
-    public String setPost(@ModelAttribute("post") Post post,@ModelAttribute("file") MultipartFile file, HttpSession session, Model model) {
+    public String setPost(@ModelAttribute("post") Post post, @ModelAttribute("file") MultipartFile file,
+            HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
         Post myPost = post;
         List<Integer> ids = new ArrayList<>();
@@ -70,8 +72,8 @@ public class PostController {
 
             myPost.setImg(fileName);
             postService.createrPost(myPost);
-            saveImage(file, postService.createrPost(myPost).getId().toString() );
-            
+            saveImage(file, postService.createrPost(myPost).getId().toString());
+
         } catch (Exception e) {
             System.out.println("Arquivo nao valido");
             msg = "Erro inesperado...";
@@ -80,12 +82,15 @@ public class PostController {
         model.addAttribute("msg", msg);
         model.addAttribute("link", link);
         session.setAttribute("user", user);
+        Log log = new Log(user.getId(), "setPost", "creater post: " + post.toString(),
+                LocalDate.now().toString());
+        logService.newLog(log);
         return "msg";
     }
 
     @RequestMapping("getPost/")
     public String getPost(@ModelAttribute("post") Post post, HttpSession session, Model model) {
-        
+
         User user = (User) session.getAttribute("user");
         List<Post> posts = postService.getPosts();
         List<Post> myPosts = new ArrayList<>();
@@ -93,11 +98,11 @@ public class PostController {
             if (_post.getUsuarios().contains(user.getId())) {
                 myPosts.add(_post);
             }
-            
+
         }
-        
-        model.addAttribute("posts",  myPosts);
-        model.addAttribute("user",  user);
+
+        model.addAttribute("posts", myPosts);
+        model.addAttribute("user", user);
         session.setAttribute("user", user);
         return "post/postList";
     }
@@ -112,17 +117,14 @@ public class PostController {
                 }
                 File newFile = new File(directory.getAbsolutePath() + File.separator + file.getOriginalFilename());
                 file.transferTo(newFile);
-                System.out.println("Arquivo salvo com sucesso em: " + newFile.getAbsolutePath());
                 return true;
             } catch (IOException e) {
                 throw new IOException("Erro ao salvar o arquivo", e);
-                
+
             }
         } else {
             throw new IOException("O arquivo está vazio");
         }
     }
 
-
-    
 }
