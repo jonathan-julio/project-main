@@ -99,19 +99,19 @@ public class UserController {
         String link = "/login/";
     
         try {
-            Person person = personService.getPerson(userSession.getId());
-    
             if (utils.isAuthenticated(userSession)) {
+                Person person = personService.getPerson(userSession.getId());
                 session.setAttribute("user", userSession);
                 model.addAttribute("user", userSession);
                 model.addAttribute("person", person);
                 return "home/perfil";
             }else{
-                 msg = "Usuario não autenticado.";
+                msg = "Login ou senha invalida.";
             }
     
         } catch (Exception e) {
             System.err.println(e);
+            msg = "Usuario não autenticado.";
         }
     
         model.addAttribute("msg", msg);
